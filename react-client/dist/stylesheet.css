@@ -1,8 +1,13 @@
+body {
+  font-family: calibri;
+  font-size: 2em;
+}
+
 header {
   display: block;
   background-color: black;
   width: 100%;
-  height: 50px;
+  height: 5vh;
   color: white;
 }
 
@@ -18,8 +23,25 @@ header {
 
 footer {
   display: block;
+  position: fixed;
+  bottom: 0px;
   width: 100%;
-  height: 50px;
+  height: 5vh;
   background-color: black;
   color: white;
+}
+
+table.stats-table {
+  width: 37em;
+}
+
+.stats-table td {
+    padding: 10px 10px 0px 10px;
+    text-align: right;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+td.stat-bar {
+  width: 60%;
 }

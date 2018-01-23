@@ -1,5 +1,10 @@
 var Utils = (function() {
   return {
+    getBST: function(stats) {
+      var statValues = Object.values(stats);
+      return statValues.reduce((a,b) => a+b);
+    },
+    
     getHexColor: function(stat) {
       var result, difference;
       if (stat <= 50)
