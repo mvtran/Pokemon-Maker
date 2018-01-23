@@ -58,22 +58,6 @@ class PokemonStats extends Component {
           </tr>
         </tbody>
       </table>
-
-      /*<table className="stats-table">
-        <tbody>
-          {this.renderStatbars(stats)}
-          <tr>
-            <td>
-              <span className="blue-link" onClick={() => this.props.addStat()}>
-                [Add]
-              </span>
-            </td>
-            <td><button onClick={() => this.props.onReset()}>Reset</button></td>
-            <td>BST: </td>
-            <td>{Utils.getBST(stats)}</td>
-          </tr>
-        </tbody>
-      </table>*/
     )
   }
 }
