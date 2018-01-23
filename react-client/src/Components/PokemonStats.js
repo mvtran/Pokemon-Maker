@@ -50,11 +50,11 @@ class PokemonStats extends Component {
     return (
       <table className="stats-table">
         <tbody>
-          {this.renderStatBars(this.props.stats.values)}
+          {this.renderStatBars(this.props.stats.statValues)}
           <tr>
             <td><button onClick={() => this.props.onReset()}>Reset</button></td>
             <td>BST: </td>
-            <td>{Utils.getBST(this.props.stats.values)}</td>
+            <td>{Utils.getBST(this.props.stats.statValues)}</td>
           </tr>
         </tbody>
       </table>

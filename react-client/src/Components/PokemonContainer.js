@@ -7,7 +7,7 @@ class PokemonContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      values: {
+      statValues: {
         "HP": 50,
         "Attack": 50,
         "Defense": 50,
@@ -27,14 +27,14 @@ class PokemonContainer extends Component {
       newValue = this.state.statMax;
     }
 
-    var updatedValues = {...this.state.values};
-    updatedValues[statName] = parseInt(newValue, 10);
-    this.setState({...this.state, values: updatedValues});
+    var updatedValues = this.state;
+    updatedValues.statValues[statName] = parseInt(newValue, 10);
+    this.setState(updatedValues);
   }
 
   reset() {
-    this.setState({...this.state,
-      values: {
+    this.setState({
+      statValues: {
         "HP": 50,
         "Attack": 50,
         "Defense": 50,
@@ -42,6 +42,7 @@ class PokemonContainer extends Component {
         "Special Defense": 50,
         "Speed": 50,
       },
+      statMax: 255,
     });
   }
 
