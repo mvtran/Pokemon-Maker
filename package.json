@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Custom Pokemon creator",
   "main": "index.js",
+  "engines": {
+    "node": "6.11.1"
+  },
   "scripts": {
     "dev": "webpack -d --watch",
     "start": "node ./server/index.js",
