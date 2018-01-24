@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Utils from '../Utils.js';
 
 import PokemonStats from './PokemonStats.js';
 
@@ -6,7 +7,7 @@ import PokemonStats from './PokemonStats.js';
 class PokemonContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.defaultState = {
       statValues: {
         "HP": 50,
         "Attack": 50,
@@ -15,45 +16,43 @@ class PokemonContainer extends Component {
         "Special Defense": 50,
         "Speed": 50,
       },
-      statMax: 255,
-    };
+      statBounds: [1, 255],
+    }
+    this.state = JSON.parse(JSON.stringify(this.defaultState));
+  }
+
+  changeStat(stat, value) {
+    var updatedState = this.state;
+    updatedState.statValues[stat] = value;
+    this.setState(updatedState);
   }
 
   handleStatChange(statName, e) {
-    var newValue = e.target.value;
-    if (newValue < 1) {
-      newValue = 1;
-    } else if (newValue > this.state.statMax) {
-      newValue = this.state.statMax;
-    }
+    var newValue = Utils.validateNumber(e.target.value, this.state.statBounds);
+    this.changeStat(statName, newValue);
+  }
 
-    var updatedValues = this.state;
-    updatedValues.statValues[statName] = parseInt(newValue, 10);
-    this.setState(updatedValues);
+  // 0 is allowed only temporarily if user wants to clear input
+  handleBlur() {
+    for (var stat in this.state.statValues)
+      if (this.state.statValues[stat] == 0)
+        this.changeStat(stat, 1);
   }
 
   reset() {
-    this.setState({
-      statValues: {
-        "HP": 50,
-        "Attack": 50,
-        "Defense": 50,
-        "Special Attack": 50,
-        "Special Defense": 50,
-        "Speed": 50,
-      },
-      statMax: 255,
-    });
+    this.setState(JSON.parse(JSON.stringify(this.defaultState)));
   }
 
   render() {
     return (
-      // other stuff like name, picture, moves, etc.
-      <PokemonStats
-        stats = {this.state}
-        onChange = {(statName, e) => this.handleStatChange(statName, e)}
-        onReset = {() => this.reset()}
-      />
+      <div className="pokemon-container">
+        <PokemonStats
+          stats = {this.state}
+          onChange = {(statName, e) => this.handleStatChange(statName, e)}
+          onBlur = {() => this.handleBlur()}
+          onReset = {() => this.reset()}
+        />
+      </div>
     )
   }
 }

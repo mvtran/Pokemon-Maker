@@ -5,9 +5,7 @@ class NavBar extends Component {
   render() {
     return (
       <header>
-        <ul id="headerButtons">
-          <li className="navButton"><Link to="">Home</Link></li>
-        </ul>
+        Pokemon Maker!
       </header>
     )
   }

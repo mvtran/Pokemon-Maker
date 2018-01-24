@@ -1,10 +1,20 @@
 var Utils = (function() {
   return {
+    validateNumber: function(value, bounds) {
+      var value = parseInt(value, 10);
+      if (isNaN(value)) {
+        value = 0;
+      } else {
+        value = Math.max(bounds[0], Math.min(bounds[1], value));
+      }
+      return value;
+    },
+
     getBST: function(stats) {
       var statValues = Object.values(stats);
       return statValues.reduce((a,b) => a+b);
     },
-    
+
     getHexColor: function(stat) {
       var result, difference;
       if (stat <= 50)

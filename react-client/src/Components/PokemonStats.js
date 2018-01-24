@@ -16,11 +16,10 @@ class PokemonStats extends Component {
   renderInputField(statName, statValue) {
     return (
       <input
-        type="number"
         value={statValue}
-        min="1" max={this.props.stats.statMax}
         onChange = {(e) => this.props.onChange(statName,e)}
         onClick = {(e) => e.target.select()}
+        onBlur = {(e) => this.props.onBlur()}
       />
     );
   }

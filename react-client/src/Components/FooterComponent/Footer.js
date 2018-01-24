@@ -5,7 +5,7 @@ class Footer extends Component {
     return (
       <footer>
         <div>
-          Footer component
+          source: <a href="https://github.com/mvtran/Pokemon-Maker">github</a>
         </div>
       </footer>
     )
