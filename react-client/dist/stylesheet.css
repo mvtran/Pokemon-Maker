@@ -35,3 +35,33 @@ table.stats-table {
 td.stat-bar {
   width: 60%;
 }
+
+.stat-slider {
+    -webkit-appearance: none;
+    height: 0.7em;
+    background: rgb(200,200,200);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    cursor: pointer;
+}
+
+.stat-slider:hover {
+    opacity: 1;
+}
+
+.stat-slider::-webkit-slider-thumb {
+    opacity: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    background: #fff;
+}
+
+.stat-slider::-webkit-slider-thumb:hover {
+  opacity: 1;
+}

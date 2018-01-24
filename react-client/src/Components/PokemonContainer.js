@@ -3,6 +3,7 @@ import Utils from '../Utils.js';
 
 import PokemonStats from './PokemonStats.js';
 
+
 /* Contains all information for the custom pokemon */
 class PokemonContainer extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class PokemonContainer extends Component {
         "Speed": 50,
       },
       statBounds: [1, 255],
+
     }
     this.state = JSON.parse(JSON.stringify(this.defaultState));
   }
@@ -33,10 +35,15 @@ class PokemonContainer extends Component {
   }
 
   // 0 is allowed only temporarily if user wants to clear input
-  handleBlur() {
+  handleStatBlur() {
     for (var stat in this.state.statValues)
       if (this.state.statValues[stat] == 0)
         this.changeStat(stat, 1);
+  }
+
+  handleSlideChange(statName, e) {
+    var newValue = Utils.validateNumber(e.target.value, this.state.statBounds);
+    this.changeStat(statName, newValue);
   }
 
   reset() {
@@ -48,8 +55,9 @@ class PokemonContainer extends Component {
       <div className="pokemon-container">
         <PokemonStats
           stats = {this.state}
-          onChange = {(statName, e) => this.handleStatChange(statName, e)}
-          onBlur = {() => this.handleBlur()}
+          onStatChange = {(statName, e) => this.handleStatChange(statName, e)}
+          onSlideChange = {(statName, e) => this.handleSlideChange(statName, e)}
+          onBlur = {() => this.handleStatBlur()}
           onReset = {() => this.reset()}
         />
       </div>

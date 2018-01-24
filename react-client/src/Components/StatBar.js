@@ -1,21 +1,33 @@
 import React, { Component } from 'react';
 
 class StatBar extends Component {
-  handleMouseOver() {
 
+  getStyle() {
+    var length = Math.max(1, ~~((this.props.statValue/255) * 100));
+
+    const barStyle = {
+      "width": "30vw",
+      "background-image": "linear-gradient(to right, " +
+        this.props.color + " " + length + "%, #fff " +
+        length + "%)"
+    };
+    return barStyle;
   }
 
   render() {
+    var min = this.props.stats.statBounds[0];
+    var max = this.props.stats.statBounds[1];
+    const barStyle = this.getStyle();
+
     return (
-        <div style={{
-            width: this.props.width,
-            height: "0.7em",
-            border: "1px solid #ddd",
-            backgroundColor: this.props.color
-          }}>
+        <div>
+          <input className="stat-slider" type="range" min={min} max={max}
+            onChange = {(e) => this.props.onChange(this.props.statName, e)}
+            style = {barStyle}
+          />
         </div>
-      );
+    )
   }
 }
 
-module.exports = StatBar;
+export default StatBar;

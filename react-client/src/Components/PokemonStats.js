@@ -4,11 +4,14 @@ import Utils from '../Utils.js';
 import StatBar from './StatBar.js';
 
 class PokemonStats extends Component {
-  renderSingleBar(value) {
+  renderSingleBar(statName, statValue) {
     return (
       <StatBar
-        width= {(value/10) + "vw"}
-        color= {"#" + Utils.getHexColor(value)}
+        stats = {this.props.stats}
+        statName = {statName}
+        statValue = {statValue}
+        color = {"#" + Utils.getHexColor(statValue)}
+        onChange = {(statName, e) => this.props.onSlideChange(statName, e)}
       />
     );
   }
@@ -17,7 +20,8 @@ class PokemonStats extends Component {
     return (
       <input
         value={statValue}
-        onChange = {(e) => this.props.onChange(statName,e)}
+        size="3"
+        onChange = {(e) => this.props.onStatChange(statName,e)}
         onClick = {(e) => e.target.select()}
         onBlur = {(e) => this.props.onBlur()}
       />
@@ -38,7 +42,7 @@ class PokemonStats extends Component {
             {statValues[stat]}
           </td>
           <td className="stat-bar">
-            {this.renderSingleBar(statValues[stat])}
+            {this.renderSingleBar(stat, statValues[stat])}
           </td>
         </tr>
       );
