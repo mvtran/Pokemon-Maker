@@ -4,7 +4,7 @@ import Utils from '../Utils.js';
 import StatBar from './StatBar.js';
 
 class PokemonStats extends Component {
-  renderSingleBar(statName, statValue) {
+  renderStatBar(statName, statValue) {
     return (
       <StatBar
         stats = {this.props.stats}
@@ -28,7 +28,7 @@ class PokemonStats extends Component {
     );
   }
 
-  renderStatBars(statValues) {
+  renderStats(statValues) {
     return Object.keys(statValues).map((stat, idx) => {
       return (
         <tr key={idx}>
@@ -42,7 +42,7 @@ class PokemonStats extends Component {
             {statValues[stat]}
           </td>
           <td className="stat-bar">
-            {this.renderSingleBar(stat, statValues[stat])}
+            {this.renderStatBar(stat, statValues[stat])}
           </td>
         </tr>
       );
@@ -53,11 +53,11 @@ class PokemonStats extends Component {
     return (
       <table className="stats-table">
         <tbody>
-          {this.renderStatBars(this.props.stats.statValues)}
+          {this.renderStats(this.props.stats.statValues)}
           <tr>
             <td><button onClick={() => this.props.onReset()}>Reset</button></td>
             <td>BST: </td>
-            <td>{Utils.getBST(this.props.stats.statValues)}</td>
+            <td className="stat-number">{Utils.getBST(this.props.stats.statValues)}</td>
           </tr>
         </tbody>
       </table>

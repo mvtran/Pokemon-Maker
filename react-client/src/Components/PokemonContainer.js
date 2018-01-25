@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Utils from '../Utils.js';
 
 import PokemonStats from './PokemonStats.js';
-
+import PokemonImage from './PokemonImage.js';
 
 /* Contains all information for the custom pokemon */
 class PokemonContainer extends Component {

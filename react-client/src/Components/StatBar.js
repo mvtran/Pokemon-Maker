@@ -2,29 +2,31 @@ import React, { Component } from 'react';
 
 class StatBar extends Component {
 
-  getStyle() {
-    var length = Math.max(1, ~~((this.props.statValue/255) * 100));
+  getBarStyle() {
+    var max = this.props.stats.statBounds[1];
+    var length = Math.max(1, (this.props.statValue/max) * 100);
 
     const barStyle = {
-      "width": "30vw",
+      width: "25vw",
       "background-image": "linear-gradient(to right, " +
         this.props.color + " " + length + "%, #fff " +
         length + "%)"
     };
+
     return barStyle;
   }
 
   render() {
     var min = this.props.stats.statBounds[0];
     var max = this.props.stats.statBounds[1];
-    const barStyle = this.getStyle();
+    const barStyle = this.getBarStyle();
 
     return (
         <div>
           <input className="stat-slider" type="range" min={min} max={max}
             onChange = {(e) => this.props.onChange(this.props.statName, e)}
             style = {barStyle}
-          />
+            tabindex = "-1" />
         </div>
     )
   }
