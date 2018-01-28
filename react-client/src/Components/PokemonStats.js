@@ -11,7 +11,7 @@ class PokemonStats extends Component {
         statName = {statName}
         statValue = {statValue}
         color = {"#" + Utils.getHexColor(statValue)}
-        onChange = {(statName, e) => this.props.onSlideChange(statName, e)}
+        onChange = {(statName, e) => this.props.onStatChange(statName, e)}
       />
     );
   }

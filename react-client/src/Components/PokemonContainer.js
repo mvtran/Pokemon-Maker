@@ -18,9 +18,12 @@ class PokemonContainer extends Component {
         "Speed": 50,
       },
       statBounds: [1, 255],
-
+      currentImage: "../../assets/placeholder.png"
     }
     this.state = JSON.parse(JSON.stringify(this.defaultState));
+
+    this.handleChangeImage = this.handleChangeImage.bind(this);
+    this.handleSubmitImage = this.handleSubmitImage.bind(this);
   }
 
   changeStat(stat, value) {
@@ -41,9 +44,15 @@ class PokemonContainer extends Component {
         this.changeStat(stat, 1);
   }
 
-  handleSlideChange(statName, e) {
-    var newValue = Utils.validateNumber(e.target.value, this.state.statBounds);
-    this.changeStat(statName, newValue);
+  handleSubmitImage(e) {
+    var updatedState = this.state;
+    updatedState.currentImage = document.getElementById("image-url").value;
+    this.setState(updatedState);
+    e.preventDefault();
+  }
+
+  handleChangeImage(e) {
+
   }
 
   reset() {
@@ -53,13 +62,27 @@ class PokemonContainer extends Component {
   render() {
     return (
       <div className="pokemon-container">
-        <PokemonStats
-          stats = {this.state}
-          onStatChange = {(statName, e) => this.handleStatChange(statName, e)}
-          onSlideChange = {(statName, e) => this.handleSlideChange(statName, e)}
-          onBlur = {() => this.handleStatBlur()}
-          onReset = {() => this.reset()}
-        />
+        <div className="image-input">
+          <form onSubmit={this.handleSubmitImage}>
+            <label>
+              Image URL:<br/>
+              <input type="text" value={this.state.value} id="image-url" onChange={this.handleChangeImage} />
+            </label>
+            <input type="submit" value="Submit" id="image-submit-button" />
+          </form>
+        </div>
+        <div className="pokemon-image-box">
+          <PokemonImage
+            src={this.state.currentImage}/>
+        </div>
+        <div className="pokemon-stats">
+          <PokemonStats
+            stats = {this.state}
+            onStatChange = {(statName, e) => this.handleStatChange(statName, e)}
+            onBlur = {() => this.handleStatBlur()}
+            onReset = {() => this.reset()}
+          />
+        </div>
       </div>
     )
   }

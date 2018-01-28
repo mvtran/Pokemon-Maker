@@ -74,4 +74,37 @@ td.stat-number {
 .pokemon-container {
   margin-top: 2%;
   margin-left: 2%;
+  margin-right: 2%;
+  overflow: hidden;
+}
+
+.pokemon-name {
+  float: top;
+  margin-bottom: 1vw;
+}
+
+.pokemon-image-box {
+  float: left;
+  margin-right: 2vw;
+  padding: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5%;
+  box-shadow: 2px 2px 1px grey;
+}
+
+.pokemon-stats {
+
+}
+
+.pokemon-image {
+  max-width: 250px; /* maybe vary this if allow multiple pokemon? */
+  height: auto;
+}
+
+.image-input {
+  margin: 1em;
+}
+
+#image-submit-button {
+  margin-left: 1em;
 }
