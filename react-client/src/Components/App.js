@@ -8,14 +8,14 @@ import Footer from './FooterComponent/Footer.js';
 
 import PokemonContainer from './PokemonContainer.js';
 
-
+//<Route name="home" exact path="/" component={PokemonContainer} />
 class App extends Component {
   render() {
     return (
       <Router>
         <div>
           <NavBar />
-          <Route name="home" exact path="/" component={PokemonContainer} />
+          <PokemonContainer />
           <Footer />
         </div>
       </Router>

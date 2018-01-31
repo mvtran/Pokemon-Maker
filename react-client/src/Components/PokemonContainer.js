@@ -21,8 +21,6 @@ class PokemonContainer extends Component {
       currentImage: "../../assets/placeholder.png"
     }
     this.state = JSON.parse(JSON.stringify(this.defaultState));
-
-    this.handleChangeImage = this.handleChangeImage.bind(this);
     this.handleSubmitImage = this.handleSubmitImage.bind(this);
   }
 
@@ -51,10 +49,6 @@ class PokemonContainer extends Component {
     e.preventDefault();
   }
 
-  handleChangeImage(e) {
-
-  }
-
   reset() {
     this.setState(JSON.parse(JSON.stringify(this.defaultState)));
   }
@@ -66,7 +60,8 @@ class PokemonContainer extends Component {
           <form onSubmit={this.handleSubmitImage}>
             <label>
               Image URL:<br/>
-              <input type="text" value={this.state.value} id="image-url" onChange={this.handleChangeImage} />
+              <input type="text" value={this.state.value} id="image-url"
+                onClick = {(e) => e.target.select()} />
             </label>
             <input type="submit" value="Submit" id="image-submit-button" />
           </form>

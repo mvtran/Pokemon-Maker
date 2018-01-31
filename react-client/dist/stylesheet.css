@@ -86,6 +86,7 @@ td.stat-number {
 .pokemon-image-box {
   float: left;
   margin-right: 2vw;
+  margin-bottom: 1vh;
   padding: 1em;
   border: 1px solid #ddd;
   border-radius: 5%;
@@ -98,7 +99,7 @@ td.stat-number {
 
 .pokemon-image {
   max-width: 250px; /* maybe vary this if allow multiple pokemon? */
-  height: auto;
+  max-height: 350px;
 }
 
 .image-input {
