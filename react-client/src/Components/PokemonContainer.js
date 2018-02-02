@@ -19,7 +19,7 @@ class PokemonContainer extends Component {
         "Speed": 50,
       },
       statBounds: [1, 255],
-      currentImage: "../../assets/placeholder.png"
+      currentImage: "../../assets/placeholder.jpg"
     }
     this.state = JSON.parse(JSON.stringify(this.defaultState));
     this.handleSubmitImage = this.handleSubmitImage.bind(this);

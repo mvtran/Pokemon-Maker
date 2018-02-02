@@ -33,7 +33,10 @@ app.all('*', function(req, res, next) {
 
 /* GET routes */
 const testRoute = require('../routes/test.js');
+const assetsRoute = require('../routes/assets.js');
+
 app.get('/test', testRoute);
+app.get('/assets*', assetsRoute);
 
 /* POST routes */
 const saveRoute = require('../routes/save.js');

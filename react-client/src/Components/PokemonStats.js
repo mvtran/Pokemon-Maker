@@ -56,7 +56,7 @@ class PokemonStats extends Component {
         <tbody>
           {this.renderStats(this.props.stats.statValues)}
           <tr>
-            <td><button onClick={() => this.props.onReset()}>Reset</button></td>
+            <td><button type="button" onClick={() => this.props.onReset()}>Reset</button></td>
             <td>BST: </td>
             <td className="stat-number">{Utils.getBST(this.props.stats.statValues)}</td>
           </tr>
