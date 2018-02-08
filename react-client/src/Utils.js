@@ -1,5 +1,10 @@
 var Utils = (function() {
   return {
+    // https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
+    escapeRegexCharacters: function(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    },
+
     validateNumber: function(value, bounds) {
       var value = parseInt(value, 10);
       if (isNaN(value)) {

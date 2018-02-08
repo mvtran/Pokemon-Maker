@@ -32,11 +32,9 @@ app.all('*', function(req, res, next) {
 });
 
 /* GET routes */
-const testRoute = require('../routes/test.js');
-const assetsRoute = require('../routes/assets.js');
-
-app.get('/test', testRoute);
-app.get('/assets*', assetsRoute);
+app.get('/test', require('../routes/test.js'));
+app.get('/assets*', require('../routes/assets.js'));
+app.get('/pokemon*', require('../routes/pokemon.js'));
 
 /* POST routes */
 const saveRoute = require('../routes/save.js');

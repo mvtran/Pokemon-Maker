@@ -1,11 +1,13 @@
 body {
   font-family: calibri;
-  font-size: 3vh;
+  font-size: 2em;
 }
 
 header {
   display: block;
+  position: fixed;
   background-color: black;
+  top: 0px;
   width: 100%;
   height: 5vh;
   color: white;
@@ -13,13 +15,14 @@ header {
 
 footer {
   display: block;
-  position: fixed;
+  position: absolute;
   bottom: 0px;
   width: 100%;
   height: 5vh;
   background-color: black;
   color: white;
 }
+
 
 table.stats-table {
   width: 37em;
@@ -72,15 +75,40 @@ td.stat-number {
 }*/
 
 .pokemon-container {
-  margin-top: 2%;
+  margin-top: 4%;
   margin-left: 2%;
   margin-right: 2%;
   overflow: hidden;
 }
 
-.pokemon-name {
+.pokemon-name-field {
   float: top;
   margin-bottom: 1vw;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+#pokemon-name {
+  float: left;
+  margin-right: 16px;
+}
+
+
+#edit-name-icon {
+  opacity: 0.5;
+  display: inline-flex;
+}
+
+
+#edit-name-icon img {
+  width: 16px;
+  height: 16px;
+}
+
+
+#edit-name-icon:hover {
+  opacity: 1;
+  cursor: pointer;
 }
 
 .pokemon-image-box {
@@ -102,7 +130,7 @@ td.stat-number {
   max-height: 350px;
 }
 
-.image-input {
+.image-input, .search-container {
   margin: 1em;
 }
 

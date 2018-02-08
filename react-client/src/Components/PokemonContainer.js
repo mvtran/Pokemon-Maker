@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import Utils from '../Utils.js';
 
+import PokemonName from './PokemonName.js';
 import PokemonStats from './PokemonStats.js';
 import PokemonImage from './PokemonImage.js';
 import PokemonAbility from './PokemonAbility.js';
+import SearchBar from './SearchBar.js';
+import ImageInsertion from './ImageInsertion.js';
+
 
 /* Contains all information for the custom pokemon */
 class PokemonContainer extends Component {
   constructor(props) {
     super(props);
     this.defaultState = {
+      name: "Pokemon Name",
+      isEditingName: false,
       statValues: {
         "HP": 50,
         "Attack": 50,
@@ -19,7 +25,7 @@ class PokemonContainer extends Component {
         "Speed": 50,
       },
       statBounds: [1, 255],
-      currentImage: "../../assets/placeholder.jpg"
+      currentImage: "../../assets/placeholder.png"
     }
     this.state = JSON.parse(JSON.stringify(this.defaultState));
     this.handleSubmitImage = this.handleSubmitImage.bind(this);
@@ -28,6 +34,21 @@ class PokemonContainer extends Component {
   changeStat(stat, value) {
     var updatedState = this.state;
     updatedState.statValues[stat] = value;
+    this.setState(updatedState);
+  }
+
+  handleEditName() {
+    var updatedState = this.state;
+    updatedState.isEditingName = true;
+    this.setState(updatedState);
+    document.getElementById("pokemon-name").focus();
+  }
+
+  handleEditedName(e) {
+    var updatedState = this.state;
+    if (e.target.value)
+      updatedState.name = e.target.value;
+    updatedState.isEditingName = false;
     this.setState(updatedState);
   }
 
@@ -54,21 +75,22 @@ class PokemonContainer extends Component {
     this.setState(JSON.parse(JSON.stringify(this.defaultState)));
   }
 
+  componentDidMount() {
+    // load data here
+  }
+
   render() {
     return (
       <div className="pokemon-container">
         <form action="/save" method="POST">
 
-          <div className="image-input">
-            <form onSubmit={this.handleSubmitImage}>
-              <label>
-                Image URL:<br/>
-                <input type="text" value={this.state.value} id="image-url"
-                  onClick = {(e) => e.target.select()} />
-              </label>
-              <input type="submit" value="Submit" id="image-submit-button" />
-            </form>
-          </div>
+          <PokemonName
+            name = {this.state.name}
+            onClick = {() => this.handleEditName()}
+            onBlur = {(e) => this.handleEditedName(e)}
+            isEditingName = {this.state.isEditingName}
+           />
+
           <div className="pokemon-image-box">
             <PokemonImage
               src={this.state.currentImage}/>
@@ -81,10 +103,10 @@ class PokemonContainer extends Component {
               onReset = {() => this.reset()}
             />
           </div>
-          <br/>
-          <button type="submit">Submit Stats</button>
-          <br/>
-          <a href="/test">Test Page</a>
+          <ImageInsertion
+            handleSubmitImage = {() => this.handleSubmitImage()}
+          />
+
         </form>
       </div>
     )
