@@ -24,6 +24,7 @@ class StatBar extends Component {
     return (
         <div>
           <input className="stat-slider" type="range" min={min} max={max}
+            title = "Click and drag to change"
             onChange = {(e) => this.props.onChange(this.props.statName, e)}
             style = {barStyle}
             tabindex = "-1" />

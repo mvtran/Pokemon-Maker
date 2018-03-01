@@ -29,21 +29,33 @@ class PokemonStats extends Component {
     );
   }
 
-  renderStats(statValues) {
+  renderStatNumber(stat) {
+    return (
+      <span onClick = {() => this.props.onStatClick()}>
+        <label for={stat}>
+          {stat}
+        </label>
+      </span>
+    )
+  }
+
+  renderStats(statValues, isEditingStats) {
     return Object.keys(statValues).map((stat, idx) => {
+
+      var statNumber = this.renderInputField(stat, statValues[stat]);
+      if (isEditingStats)
+        statNumber = this.renderStatNumber(statValues[stat]);
+
       return (
         <tr key={idx}>
-          <td className="stat-input">
-            {this.renderInputField(stat, statValues[stat])}
-          </td>
           <td className="stat-name">
             {stat}:
           </td>
           <td className="stat-number">
-            {statValues[stat]}
+            {statNumber}
           </td>
           <td className="stat-bar">
-            {this.renderStatBar(stat, statValues[stat])}
+              {this.renderStatBar(stat, statValues[stat])}
           </td>
         </tr>
       );
@@ -51,14 +63,20 @@ class PokemonStats extends Component {
   }
 
   render() {
+    var statValues = this.props.stats.statValues;
+    var isEditingStats = this.props.stats.isEditingStats;
+
     return (
       <table className="stats-table">
         <tbody>
-          {this.renderStats(this.props.stats.statValues)}
           <tr>
-            <td><button type="button" onClick={() => this.props.onReset()}>Reset</button></td>
+            <td></td>
+          </tr>
+          {this.renderStats(statValues, isEditingStats)}
+          <tr>
             <td>BST: </td>
-            <td className="stat-number">{Utils.getBST(this.props.stats.statValues)}</td>
+            <td className="stat-number">{Utils.getBST(statValues)}</td>
+            <td className="justify-left"><button type="button" onClick={() => this.props.onReset()}>Reset</button></td>
           </tr>
         </tbody>
       </table>

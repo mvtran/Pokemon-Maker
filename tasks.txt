@@ -1,0 +1,2 @@
+- Add Type, Ability, Moves section
+- Implement that wrapper on the pokeapi site

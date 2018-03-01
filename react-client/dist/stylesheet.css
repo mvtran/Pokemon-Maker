@@ -23,9 +23,17 @@ footer {
   color: white;
 }
 
+.helper-text {
+  font-size: small;
+  text-align: left;
+}
 
 table.stats-table {
-  width: 37em;
+  width: 30em;
+}
+
+.stats-table th {
+
 }
 
 .stats-table td {
@@ -35,12 +43,17 @@ table.stats-table {
     white-space: nowrap;
 }
 
+td.justify-left {
+  text-align: left;
+}
+
 td.stat-bar {
   width: 60%;
 }
 
 td.stat-number {
-  width: 6em;
+  width: 3em;
+  cursor: pointer;
 }
 
 .stat-slider {
@@ -108,6 +121,9 @@ td.stat-number {
 
 #edit-name-icon:hover {
   opacity: 1;
+}
+
+label {
   cursor: pointer;
 }
 
@@ -121,9 +137,6 @@ td.stat-number {
   box-shadow: 2px 2px 1px grey;
 }
 
-.pokemon-stats {
-
-}
 
 .pokemon-image {
   max-width: 250px; /* maybe vary this if allow multiple pokemon? */

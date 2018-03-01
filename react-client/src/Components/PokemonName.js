@@ -2,12 +2,22 @@ import React, { Component } from 'react';
 
 class PokemonName extends React.Component {
 
+  handleKeyPress(e) {
+    // some browsers use e.keyCode; others use e.which
+    var key = 'which' in e ? e.which : e.keyCode;
+    if (key == 13) {
+        document.getElementById("pokemon-name-input").blur();
+    }
+  }
+
   renderNameInputField() {
     return (
       <input
+        id = "pokemon-name-input"
         onFocus = {(e) => e.target.select()}
         onBlur = {this.props.onBlur}
-        placeholder = "Enter Pokemon name"
+        onKeyPress = {(e) => this.handleKeyPress(e)}
+        placeholder = {this.props.name}
         maxlength = "16"
       />
     )
@@ -24,10 +34,12 @@ class PokemonName extends React.Component {
           {nameDisplay}
         </div>
         <div id="edit-name-icon">
-          <img src="../../assets/pencil.png"
-            alt="Edit name"
-            onClick={this.props.onClick}
-          />
+          <label for="pokemon-name-input" title="Edit Pokemon name">
+            <img src="../../assets/pencil.png"
+              alt="Edit name"
+              onClick={this.props.onClick}
+            />
+          </label>
         </div>
       </div>
     )

@@ -10,6 +10,10 @@ import PokemonContainer from './PokemonContainer.js';
 
 //<Route name="home" exact path="/" component={PokemonContainer} />
 class App extends Component {
+  componentDidMount() {
+    // load data here
+  }
+
   render() {
     return (
       <Router>

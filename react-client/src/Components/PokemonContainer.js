@@ -25,6 +25,7 @@ class PokemonContainer extends Component {
         "Speed": 50,
       },
       statBounds: [1, 255],
+      isEditingStats: false,
       currentImage: "../../assets/placeholder.png"
     }
     this.state = JSON.parse(JSON.stringify(this.defaultState));
@@ -41,14 +42,19 @@ class PokemonContainer extends Component {
     var updatedState = this.state;
     updatedState.isEditingName = true;
     this.setState(updatedState);
-    document.getElementById("pokemon-name").focus();
   }
 
-  handleEditedName(e) {
+  handleNameBlur(e) {
     var updatedState = this.state;
     if (e.target.value)
       updatedState.name = e.target.value;
     updatedState.isEditingName = false;
+    this.setState(updatedState);
+  }
+
+  changeEditingStatus() {
+    var updatedState = this.state;
+    updatedState.isEditingStats = true;
     this.setState(updatedState);
   }
 
@@ -76,7 +82,7 @@ class PokemonContainer extends Component {
   }
 
   componentDidMount() {
-    // load data here
+    // implemented in App.js
   }
 
   render() {
@@ -87,7 +93,7 @@ class PokemonContainer extends Component {
           <PokemonName
             name = {this.state.name}
             onClick = {() => this.handleEditName()}
-            onBlur = {(e) => this.handleEditedName(e)}
+            onBlur = {(e) => this.handleNameBlur(e)}
             isEditingName = {this.state.isEditingName}
            />
 
@@ -95,14 +101,17 @@ class PokemonContainer extends Component {
             <PokemonImage
               src={this.state.currentImage}/>
           </div>
+
           <div className="pokemon-stats">
             <PokemonStats
               stats = {this.state}
+              onStatClick = {() => this.changeEditingStatus()}
               onStatChange = {(statName, e) => this.handleStatChange(statName, e)}
               onBlur = {() => this.handleStatBlur()}
               onReset = {() => this.reset()}
             />
           </div>
+
           <ImageInsertion
             handleSubmitImage = {() => this.handleSubmitImage()}
           />
