@@ -20,7 +20,7 @@ class App extends Component {
         <div>
           <NavBar />
           <PokemonContainer />
-          <Footer />
+          
         </div>
       </Router>
     )

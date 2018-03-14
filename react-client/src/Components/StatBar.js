@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class StatBar extends Component {
 
   getBarStyle() {
-    var max = this.props.stats.statBounds[1];
+    var max = this.props.state.statBounds[1];
     var length = Math.max(1, (this.props.statValue/max) * 100);
 
     const barStyle = {
@@ -17,8 +17,8 @@ class StatBar extends Component {
   }
 
   render() {
-    var min = this.props.stats.statBounds[0];
-    var max = this.props.stats.statBounds[1];
+    var min = this.props.state.statBounds[0];
+    var max = this.props.state.statBounds[1];
     const barStyle = this.getBarStyle();
 
     return (

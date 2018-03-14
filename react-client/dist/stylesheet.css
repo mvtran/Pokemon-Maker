@@ -28,12 +28,65 @@ footer {
   text-align: left;
 }
 
-table.stats-table {
-  width: 30em;
+.pokemon-container {
+
 }
 
-.stats-table th {
+.pokemon-image-container {
+  float: left;
+  margin-right: 2vw;
+  margin-bottom: 1vh;
+  padding: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5%;
+  box-shadow: 2px 2px 1px grey;
+}
 
+.pokemon-image {
+  max-width: 250px; /* maybe vary this if allow multiple pokemon? */
+  max-height: 350px;
+}
+
+.image-input, .search-container {
+  margin: 1em;
+}
+
+#image-submit-button {
+  margin-left: 1em;
+}
+
+.vertical {
+  float: left;
+  margin: 2em;
+}
+
+.type {
+  font-size: 0.8em;
+  width: 5em;
+  height: 2em;
+  padding: 3px 0;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 1px #333;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.pokemon-type-container {
+  margin-bottom: 0.5em;
+}
+
+.pokemon-ability-container {
+
+}
+
+.pokemon-stats-container {
+  float: left;
+}
+
+table.stats-table {
+  width: 30em;
 }
 
 .stats-table td {
@@ -53,7 +106,6 @@ td.stat-bar {
 
 td.stat-number {
   width: 3em;
-  cursor: pointer;
 }
 
 .stat-slider {
@@ -125,28 +177,4 @@ td.stat-number {
 
 label {
   cursor: pointer;
-}
-
-.pokemon-image-box {
-  float: left;
-  margin-right: 2vw;
-  margin-bottom: 1vh;
-  padding: 1em;
-  border: 1px solid #ddd;
-  border-radius: 5%;
-  box-shadow: 2px 2px 1px grey;
-}
-
-
-.pokemon-image {
-  max-width: 250px; /* maybe vary this if allow multiple pokemon? */
-  max-height: 350px;
-}
-
-.image-input, .search-container {
-  margin: 1em;
-}
-
-#image-submit-button {
-  margin-left: 1em;
 }

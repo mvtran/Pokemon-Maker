@@ -1,2 +1,10 @@
 - Add Type, Ability, Moves section
 - Implement that wrapper on the pokeapi site
+
+==ideas==
+- website.com/id/edit for edit mode, no /edit to just view
+- implement mobile design for non-editing mode (when you view a pokemon)
+  - editing mode should be desktop only
+- WILD IDEA: "I feel like there's got to be a way to read the pokemons moves and stats as causing 
+the the guide articles and train it to write an article based on a pokemons stats."
+    - i.e. generate neural network generated smogon article xD

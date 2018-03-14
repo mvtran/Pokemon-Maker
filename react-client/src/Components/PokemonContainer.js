@@ -4,6 +4,7 @@ import Utils from '../Utils.js';
 import PokemonName from './PokemonName.js';
 import PokemonStats from './PokemonStats.js';
 import PokemonImage from './PokemonImage.js';
+import PokemonType from './PokemonType.js';
 import PokemonAbility from './PokemonAbility.js';
 import SearchBar from './SearchBar.js';
 import ImageInsertion from './ImageInsertion.js';
@@ -25,7 +26,6 @@ class PokemonContainer extends Component {
         "Speed": 50,
       },
       statBounds: [1, 255],
-      isEditingStats: false,
       currentImage: "../../assets/placeholder.png"
     }
     this.state = JSON.parse(JSON.stringify(this.defaultState));
@@ -77,8 +77,10 @@ class PokemonContainer extends Component {
     e.preventDefault();
   }
 
-  reset() {
-    this.setState(JSON.parse(JSON.stringify(this.defaultState)));
+  statReset() {
+    var updatedState = this.state;
+    updatedState.statValues = JSON.parse(JSON.stringify(this.defaultState.statValues));
+    this.setState(updatedState);
   }
 
   componentDidMount() {
@@ -86,6 +88,10 @@ class PokemonContainer extends Component {
   }
 
   render() {
+    // <ImageInsertion
+    //   handleSubmitImage = {() => this.handleSubmitImage()}
+    // />
+
     return (
       <div className="pokemon-container">
         <form action="/save" method="POST">
@@ -97,24 +103,32 @@ class PokemonContainer extends Component {
             isEditingName = {this.state.isEditingName}
            />
 
-          <div className="pokemon-image-box">
+          <div className="pokemon-image-container">
             <PokemonImage
               src={this.state.currentImage}/>
           </div>
 
-          <div className="pokemon-stats">
+          <div className = "vertical">
+            <div className = "pokemon-type-container">
+              <h3>Type</h3>
+              <PokemonType name = "Normal"/>
+            </div>
+
+            <div className = "pokemon-ability-container">
+              <h3>Ability</h3>
+              Magic Guard
+            </div>
+          </div>
+
+          <div className="pokemon-stats-container">
             <PokemonStats
-              stats = {this.state}
+              state = {this.state}
               onStatClick = {() => this.changeEditingStatus()}
               onStatChange = {(statName, e) => this.handleStatChange(statName, e)}
               onBlur = {() => this.handleStatBlur()}
-              onReset = {() => this.reset()}
+              onReset = {() => this.statReset()}
             />
           </div>
-
-          <ImageInsertion
-            handleSubmitImage = {() => this.handleSubmitImage()}
-          />
 
         </form>
       </div>

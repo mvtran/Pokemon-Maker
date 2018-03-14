@@ -7,7 +7,7 @@ class PokemonStats extends Component {
   renderStatBar(statName, statValue) {
     return (
       <StatBar
-        stats = {this.props.stats}
+        state = {this.props.state}
         statName = {statName}
         statValue = {statValue}
         color = {"#" + Utils.getHexColor(statValue)}
@@ -39,12 +39,11 @@ class PokemonStats extends Component {
     )
   }
 
-  renderStats(statValues, isEditingStats) {
+  renderStats(statValues) {
     return Object.keys(statValues).map((stat, idx) => {
 
       var statNumber = this.renderInputField(stat, statValues[stat]);
-      if (isEditingStats)
-        statNumber = this.renderStatNumber(statValues[stat]);
+      var statBar = this.renderStatBar(stat, statValues[stat]);
 
       return (
         <tr key={idx}>
@@ -55,7 +54,7 @@ class PokemonStats extends Component {
             {statNumber}
           </td>
           <td className="stat-bar">
-              {this.renderStatBar(stat, statValues[stat])}
+            {statBar}
           </td>
         </tr>
       );
@@ -63,8 +62,7 @@ class PokemonStats extends Component {
   }
 
   render() {
-    var statValues = this.props.stats.statValues;
-    var isEditingStats = this.props.stats.isEditingStats;
+    var statValues = this.props.state.statValues;
 
     return (
       <table className="stats-table">
@@ -72,7 +70,7 @@ class PokemonStats extends Component {
           <tr>
             <td></td>
           </tr>
-          {this.renderStats(statValues, isEditingStats)}
+          {this.renderStats(statValues)}
           <tr>
             <td>BST: </td>
             <td className="stat-number">{Utils.getBST(statValues)}</td>
