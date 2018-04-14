@@ -60,6 +60,14 @@ footer {
   margin: 2em;
 }
 
+.pokemon-type-container {
+  /* background-color: red; */
+}
+
+.pokemon-ability-container {
+  /* background-color: blue; */
+}
+
 .type {
   font-size: 0.8em;
   width: 5em;
@@ -68,17 +76,18 @@ footer {
   text-align: center;
   color: white;
   text-shadow: 1px 1px 1px #333;
-  border: 1px solid black;
+  border: 1px solid gray;
   border-radius: 5px;
   box-sizing: border-box;
 }
 
-.pokemon-type-container {
-  margin-bottom: 0.5em;
+#type-1 {
+  float: left;
 }
 
-.pokemon-ability-container {
-
+#type-2 {
+  float: left;
+  margin-left: 0.3em;
 }
 
 .pokemon-stats-container {

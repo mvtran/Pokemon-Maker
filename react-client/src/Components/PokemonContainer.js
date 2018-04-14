@@ -26,7 +26,8 @@ class PokemonContainer extends Component {
         "Speed": 50,
       },
       statBounds: [1, 255],
-      currentImage: "../../assets/placeholder.png"
+      currentImage: "../../assets/placeholder.png",
+      type: ["Normal", "Flying"]
     }
     this.state = JSON.parse(JSON.stringify(this.defaultState));
     this.handleSubmitImage = this.handleSubmitImage.bind(this);
@@ -77,6 +78,18 @@ class PokemonContainer extends Component {
     e.preventDefault();
   }
 
+  onDropdownSelected(e, which) {
+    var updatedState = this.state;
+
+    if (which == 1) {
+      updatedState.type[0] = e.target.value;
+    } else if (which == 2) {
+      updatedState.type[1] = e.target.value;
+    }
+
+    this.setState(updatedState);
+  }
+
   statReset() {
     var updatedState = this.state;
     updatedState.statValues = JSON.parse(JSON.stringify(this.defaultState.statValues));
@@ -111,12 +124,14 @@ class PokemonContainer extends Component {
           <div className = "vertical">
             <div className = "pokemon-type-container">
               <h3>Type</h3>
-              <PokemonType name = "Normal"/>
+              <PokemonType
+                type = {this.state.type}
+                onDropdownSelected = {(e, which) => this.onDropdownSelected(e, which)}
+                />
             </div>
 
             <div className = "pokemon-ability-container">
-              <h3>Ability</h3>
-              Magic Guard
+
             </div>
           </div>
 
