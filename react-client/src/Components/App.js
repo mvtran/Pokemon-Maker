@@ -15,7 +15,7 @@ class App extends Component {
     const Pokedex = require('pokeapi-js-wrapper');
     const P = new Pokedex.Pokedex({protocol: 'https'});
 
-    P.getPokemonByName('eevee') // with Promise
+    P.getPokemonByName('volcarona') // with Promise
     .then(function(response) {
       console.log(response);
     })

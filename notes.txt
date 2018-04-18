@@ -12,5 +12,4 @@ the the guide articles and train it to write an article based on a pokemons stat
 
 ==fixes==
 - make sure to do "npm run build" when changing files like webpack.config.js
-- added "new webpack.optimize.UglifyJsPlugin()" to plugins to get rid of
-  dead code elimination error in console
+- https://babeljs.io to convert from es6 to es5

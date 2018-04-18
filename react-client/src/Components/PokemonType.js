@@ -27,11 +27,7 @@ const typeList = {
 
 class PokemonType extends React.Component {
   renderType(which) {
-    if (which == 1) {
-      var type = this.props.type[0];
-    } else {
-      var type = this.props.type[1];
-    }
+    var type = this.props.type[which-1];
 
     if (type == null) {
       type = "Normal";
