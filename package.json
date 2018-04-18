@@ -48,8 +48,11 @@
   },
   "babel": {
     "presets": [
-      "es2015",
-      "react"
+      "latest"
     ]
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-latest": "^6.24.1"
   }
 }

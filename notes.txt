@@ -13,3 +13,8 @@ the the guide articles and train it to write an article based on a pokemons stat
 ==fixes==
 - make sure to do "npm run build" when changing files like webpack.config.js
 - https://babeljs.io to convert from es6 to es5
+- if you change things manually in node_modules, heroku might not catch them
+  because it uses cached node_modules. thus, do:
+    $ heroku config:set NODE_MODULES_CACHE=false
+    $ git commit -am 'disable node_modules cache' --allow-empty
+    $ git push heroku master
