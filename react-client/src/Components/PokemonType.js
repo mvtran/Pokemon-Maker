@@ -3,11 +3,12 @@ import Utils from '../Utils.js';
 
 // TODO: replace with actual colors (color picker on in-game sprites)
 const typeList = {
+  'None': 'white',
   'Fire': 'orange',
   'Water': 'dodgerblue',
-  'Grass': 'green',
-  'Electric': 'yellow',
-  'Ice': 'aqua',
+  'Grass': 'limegreen',
+  'Electric': 'gold',
+  'Ice': 'paleturquoise',
   'Psychic': 'deeppink',
   'Dark': 'black',
   'Fairy': 'pink',
@@ -20,29 +21,25 @@ const typeList = {
   'Ghost': 'darkviolet',
   'Normal': 'burlywood',
   'Poison': 'purple',
-  'Bug': 'yellowgreen',
+  'Bug': 'yellowgreen'
 };
 
 
 class PokemonType extends React.Component {
   renderType(which) {
     if (which == 1) {
-
       var type = this.props.type[0];
-      if (type == null) {
-        type = "Normal";
-      }
-      return <div className="type" style={{'background-color': typeList[type]}}>{type}</div>
-
-    } else if (which == 2) {
-
+    } else {
       var type = this.props.type[1];
-      if (type != null) {
-        return <div className="type" style={{'background-color': typeList[type]}}>{type}</div>
-      } else {
-        return <div></div>
-      }
     }
+
+    if (type == null) {
+      type = "Normal";
+    } else if (type == "None") {
+      return <div className="type" style={{'visibility': 'hidden'}}></div>
+    }
+
+    return <div className="type" style={{'background-color': typeList[type]}}>{type}</div>
   }
 
   renderOptions(whichType) {
@@ -51,8 +48,12 @@ class PokemonType extends React.Component {
     var list = Object.keys(typeList);
     for (let i = 0; i < list.length; i++) {
 
-        if (whichType == 1 && list[i] != second ||
-            whichType == 2 && list[i] != first) {
+        // exclude type if primary/secondary type is already it
+        if (
+            whichType == 1 && list[i] != "None" &&
+            whichType == 1 && list[i] != second ||
+            whichType == 2 && list[i] != first
+          ){
 
           types.push(<option key={i} id={list[i] + whichType} value={list[i]}>{list[i]}</option>);
         }
@@ -60,12 +61,13 @@ class PokemonType extends React.Component {
     return types;
   }
 
-  //TODO: Detect if types selected, then exclude it from other dropdown
   renderTypePicker(whichType) {
     return (
-      <select onChange={(e, which) => this.props.onDropdownSelected(e, whichType)}>
-        <option value="" disabled selected>Select type</option>
-        {this.renderOptions(whichType)}
+      <select
+        className = "type-dropdown"
+        onChange={(e, which) => this.props.onDropdownSelected(e, whichType)}>
+          <option value="" disabled selected>Select type</option>
+          {this.renderOptions(whichType)}
       </select>
     )
   }
@@ -75,12 +77,10 @@ class PokemonType extends React.Component {
       <div>
         <div id="type-1">
           {this.renderType(1)}
-          <br/>
           {this.renderTypePicker(1)}
         </div>
         <div id="type-2">
           {this.renderType(2)}
-          <br/>
           {this.renderTypePicker(2)}
         </div>
       </div>

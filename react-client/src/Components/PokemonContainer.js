@@ -119,20 +119,17 @@ class PokemonContainer extends Component {
           <div className="pokemon-image-container">
             <PokemonImage
               src={this.state.currentImage}/>
+              <ImageInsertion
+                handleSubmitImage = {() => this.handleSubmitImage()}
+              />  
           </div>
 
-          <div className = "vertical">
-            <div className = "pokemon-type-container">
-              <h3>Type</h3>
-              <PokemonType
-                type = {this.state.type}
-                onDropdownSelected = {(e, which) => this.onDropdownSelected(e, which)}
-                />
-            </div>
-
-            <div className = "pokemon-ability-container">
-
-            </div>
+          <div className = "pokemon-type-container">
+            <h3>Type</h3>
+            <PokemonType
+              type = {this.state.type}
+              onDropdownSelected = {(e, which) => this.onDropdownSelected(e, which)}
+            />
           </div>
 
           <div className="pokemon-stats-container">
