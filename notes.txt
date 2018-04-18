@@ -6,6 +6,11 @@
 - implement mobile design for non-editing mode (when you view a pokemon)
   - editing mode should be desktop only
 - when the stats match an existing pokemon, show all matches in the side?
-- WILD IDEA: "I feel like there's got to be a way to read the pokemons moves and stats as causing 
+- WILD IDEA: "I feel like there's got to be a way to read the pokemons moves and stats as causing
 the the guide articles and train it to write an article based on a pokemons stats."
     - i.e. generate neural network generated smogon article xD
+
+==fixes==
+- make sure to do "npm run build" when changing files like webpack.config.js
+- added "new webpack.optimize.UglifyJsPlugin()" to plugins to get rid of
+  dead code elimination error in console

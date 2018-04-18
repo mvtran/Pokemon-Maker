@@ -10,8 +10,18 @@ import PokemonContainer from './PokemonContainer.js';
 
 //<Route name="home" exact path="/" component={PokemonContainer} />
 class App extends Component {
+
   componentDidMount() {
-    // load data here
+    const Pokedex = require('pokeapi-js-wrapper');
+    const P = new Pokedex.Pokedex({protocol: 'https'});
+
+    P.getPokemonByName('eevee') // with Promise
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(err) {
+      console.log(err)
+    });
   }
 
   render() {
@@ -20,7 +30,7 @@ class App extends Component {
         <div>
           <NavBar />
           <PokemonContainer />
-          
+
         </div>
       </Router>
     )

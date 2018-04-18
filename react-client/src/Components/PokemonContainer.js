@@ -73,7 +73,12 @@ class PokemonContainer extends Component {
 
   handleSubmitImage(e) {
     var updatedState = this.state;
-    updatedState.currentImage = document.getElementById("image-url").value;
+    var image = document.getElementById("image-url").value;
+    if (image == "") {
+      updatedState.currentImage = "../../assets/placeholder.png";
+    } else {
+      updatedState.currentImage = image;
+    }
     this.setState(updatedState);
     e.preventDefault();
   }
@@ -101,9 +106,6 @@ class PokemonContainer extends Component {
   }
 
   render() {
-    // <ImageInsertion
-    //   handleSubmitImage = {() => this.handleSubmitImage()}
-    // />
 
     return (
       <div className="pokemon-container">
@@ -119,9 +121,9 @@ class PokemonContainer extends Component {
           <div className="pokemon-image-container">
             <PokemonImage
               src={this.state.currentImage}/>
-              <ImageInsertion
-                handleSubmitImage = {() => this.handleSubmitImage()}
-              />  
+            <ImageInsertion
+              handleSubmitImage = {() => this.handleSubmitImage()}
+            />
           </div>
 
           <div className = "pokemon-type-container">

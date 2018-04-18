@@ -3,7 +3,6 @@ const SRC_DIR = path.join(__dirname, '/react-client/src');
 const DIST_DIR = path.join(__dirname, '/react-client/dist');
 const webpack = require('webpack');
 
-
 module.exports = {
   entry: `${SRC_DIR}/index.js`,
   output: {
@@ -37,9 +36,16 @@ module.exports = {
       }
     ]
   },
+  devtool: "source-map", // cheap-source-map will not work with UglifyJsPlugin
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
-    })
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,   // enable source maps to map errors (stack traces) to modules
+      output: {
+        comments: false, // remove all comments
+      },
+    }),
   ]
 };
