@@ -144,6 +144,10 @@ class PokemonContainer extends Component {
             />
           </div>
 
+          <div className="search-pokemon">
+            wow
+          </div>
+
         </form>
       </div>
     )
