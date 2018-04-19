@@ -4,13 +4,14 @@ import Utils from '../Utils.js';
 // TODO: replace with actual colors (color picker on in-game sprites)
 const typeList = {
   'None': 'white',
+  'Normal': 'burlywood',
   'Fire': 'orange',
   'Water': 'dodgerblue',
   'Grass': 'limegreen',
   'Electric': 'gold',
   'Ice': 'paleturquoise',
   'Psychic': 'deeppink',
-  'Dark': 'black',
+  'Dark': 'darkslategray',
   'Fairy': 'pink',
   'Dragon': 'blue',
   'Rock': 'chocolate',
@@ -18,8 +19,7 @@ const typeList = {
   'Steel': 'silver',
   'Fighting': 'red',
   'Flying': 'deepskyblue',
-  'Ghost': 'darkviolet',
-  'Normal': 'burlywood',
+  'Ghost': 'indigo',
   'Poison': 'purple',
   'Bug': 'yellowgreen'
 };
@@ -51,7 +51,17 @@ class PokemonType extends React.Component {
             whichType == 2 && list[i] != first
           ){
 
-          types.push(<option key={i} id={list[i] + whichType} value={list[i]}>{list[i]}</option>);
+          if (list[i] == this.props.type[0] || list[i] == this.props.type[1]) {
+            types.push(<option
+              key={i + " " + whichType} id={list[i] + whichType} value={list[i]} selected>
+                {list[i]}
+              </option>);
+          } else {
+            types.push(<option
+              key={i + " " + whichType} id={list[i] + whichType} value={list[i]}>
+                {list[i]}
+              </option>);
+          }
         }
     }
     return types;

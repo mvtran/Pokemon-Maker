@@ -29,7 +29,7 @@ class PokemonName extends React.Component {
       nameDisplay = this.renderNameInputField();
 
     return (
-      <div className="pokemon-name-field">
+      <div>
         <div id="pokemon-name">
           {nameDisplay}
         </div>

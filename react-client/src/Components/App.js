@@ -12,16 +12,7 @@ import PokemonContainer from './PokemonContainer.js';
 class App extends Component {
 
   componentDidMount() {
-    const Pokedex = require('pokeapi-js-wrapper');
-    const P = new Pokedex.Pokedex({protocol: 'https'});
-
-    P.getPokemonByName('volcarona') // with Promise
-    .then(function(response) {
-      console.log(response);
-    })
-    .catch(function(err) {
-      console.log(err)
-    });
+    // load data and stuff here
   }
 
   render() {

@@ -23,11 +23,6 @@ footer {
   color: white;
 }
 
-.helper-text {
-  font-size: small;
-  text-align: left;
-}
-
 .pokemon-container {
   margin-top: 4%;
   margin-left: 2%;
@@ -35,7 +30,7 @@ footer {
   overflow: hidden;
 }
 
-.pokemon-name-field {
+.pokemon-name-container {
   float: top;
   margin-bottom: 1vw;
   font-size: 2em;
@@ -86,7 +81,7 @@ label {
   margin: 1em;
 }
 
-#image-submit-button {
+#image-submit-button, #search-pokemon-button {
   margin-left: 1em;
 }
 
@@ -181,6 +176,6 @@ td.stat-number {
   opacity: 1;
 }*/
 
-.search-pokemon {
+.search-pokemon-container {
   float: bottom;
 }
