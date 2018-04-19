@@ -98,7 +98,7 @@ class PokemonContainer extends Component {
     var pokemon = document.getElementById("search-pokemon").value;
 
     if (pokemon) {
-      const Pokedex = require('../../../pokeapi-js-wrapper');
+      const Pokedex = require('../../../node_modules/pokeapi-js-wrapper');
       const P = new Pokedex.Pokedex({protocol: 'https'});
 
       var _this = this; // this becomes undefined if not stored here
