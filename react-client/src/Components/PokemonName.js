@@ -14,11 +14,11 @@ class PokemonName extends React.Component {
     return (
       <input
         id = "pokemon-name-input"
+        placeholder = {this.props.name}
+        maxlength = "16"
         onFocus = {(e) => e.target.select()}
         onBlur = {this.props.onBlur}
         onKeyPress = {(e) => this.handleKeyPress(e)}
-        placeholder = {this.props.name}
-        maxlength = "16"
       />
     )
   }
@@ -28,8 +28,9 @@ class PokemonName extends React.Component {
     if (this.props.isEditingName)
       nameDisplay = this.renderNameInputField();
 
-    return (
+    return ( // the hidden input is kludge but oh well
       <div>
+        <input type="hidden" name="name" value={this.props.name}/>
         <div id="pokemon-name">
           {nameDisplay}
         </div>

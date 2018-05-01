@@ -19,9 +19,9 @@ class PokemonStats extends Component {
   renderInputField(statName, statValue) {
     return (
       <input
+        name={Utils.standardName(statName)}
         value={statValue}
         size="3"
-        name={statName}
         onChange = {(e) => this.props.onStatChange(statName,e)}
         onClick = {(e) => e.target.select()}
         onBlur = {(e) => this.props.onBlur()}

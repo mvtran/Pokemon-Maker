@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Utils from '../Utils.js';
+import * as U from '../Utils.js';
 
 import PokemonName from './PokemonName.js';
 import PokemonStats from './PokemonStats.js';
@@ -33,6 +33,20 @@ class PokemonContainer extends Component {
     this.state = JSON.parse(JSON.stringify(this.defaultState));
     this.handleSubmitImage = this.handleSubmitImage.bind(this);
     this.handleSearchPokemon = this.handleSearchPokemon.bind(this);
+
+    // localStorage.setItem("apple", "pie");
+    // const cache = localStorage.getItem("apple");
+    // if (cache) {
+    //   console.log("Success! Value is " + cache);
+    // } else {
+    //   console.log("fuck you");
+    // }
+  }
+
+  changeName(newName) {
+    var updatedState = this.state;
+    updatedState["name"] = newName;
+    this.setState(updatedState);
   }
 
   changeStat(stat, value) {
@@ -51,7 +65,26 @@ class PokemonContainer extends Component {
     this.setState(updatedState);
   }
 
-  handleEditName() {
+  // "res" = pokemon in json returned by pokeapi
+  insertPokemon(res) {
+    this.changeName(U.capitalize(res["name"]));
+
+    if (res.types.length == 1) {
+      this.changeType(0, res.types[0]["type"]["name"], true);
+    } else if (res.types.length == 2) {
+      this.changeType(0, res.types[1]["type"]["name"], false);
+      this.changeType(1, res.types[0]["type"]["name"], false);
+    }
+
+    this.changeStat("HP", res.stats[5].base_stat);
+    this.changeStat("Attack", res.stats[4].base_stat);
+    this.changeStat("Defense", res.stats[3].base_stat);
+    this.changeStat("Special Attack", res.stats[2].base_stat);
+    this.changeStat("Special Defense", res.stats[1].base_stat);
+    this.changeStat("Speed", res.stats[0].base_stat);
+  }
+
+  handleNameClick() {
     var updatedState = this.state;
     updatedState.isEditingName = true;
     this.setState(updatedState);
@@ -72,7 +105,7 @@ class PokemonContainer extends Component {
   }
 
   handleStatChange(statName, e) {
-    var newValue = Utils.validateNumber(e.target.value, this.state.statBounds);
+    var newValue = U.validateNumber(e.target.value, this.state.statBounds);
     this.changeStat(statName, newValue);
   }
 
@@ -101,31 +134,11 @@ class PokemonContainer extends Component {
       const Pokedex = require('../../../node_modules/pokeapi-js-wrapper');
       const P = new Pokedex.Pokedex({protocol: 'https'});
 
-      var _this = this; // this becomes undefined if not stored here
+      var _this = this; // "this" becomes undefined if not stored here
 
       P.getPokemonByName(pokemon)
       .then(function(res) {
-
-        if (res.types.length == 1) {
-          _this.changeType(0, res.types[0]["type"]["name"], true);
-        } else if (res.types.length == 2) {
-          _this.changeType(0, res.types[1]["type"]["name"], false);
-          _this.changeType(1, res.types[0]["type"]["name"], false);
-        }
-
-        var hp = res.stats[5].base_stat,
-            atk = res.stats[4].base_stat,
-            def = res.stats[3].base_stat,
-            spa = res.stats[2].base_stat,
-            spd = res.stats[1].base_stat,
-            spe = res.stats[0].base_stat;
-
-        _this.changeStat("HP", hp);
-        _this.changeStat("Attack", atk);
-        _this.changeStat("Defense", def);
-        _this.changeStat("Special Attack", spa);
-        _this.changeStat("Special Defense", spd);
-        _this.changeStat("Speed", spe);
+        _this.insertPokemon(res);
       })
       .catch(function(err) {
         console.log("FAILURE HAHAHAHAHAHA");
@@ -157,8 +170,56 @@ class PokemonContainer extends Component {
     e.preventDefault();
   }
 
-  componentDidMount() {
-    // implemented in App.js
+  renderNameContainer() {
+    return (
+      <div className="pokemon-name-container">
+        <PokemonName
+          name = {this.state.name}
+          onClick = {() => this.handleNameClick()}
+          onBlur = {(e) => this.handleNameBlur(e)}
+          isEditingName = {this.state.isEditingName}
+         />
+       </div>
+    )
+  }
+
+  renderImageContainer() {
+    return (
+      <div className="pokemon-image-container">
+        <PokemonImage
+          src={this.state.currentImage}/>
+        <ImageInsertion
+          handleSubmitImage = {() => this.handleSubmitImage()}
+        />
+        <button onClick={(e) => this.resetEverything(e)}>Reset Everything</button>
+      </div>
+    )
+  }
+
+  renderTypeContainer() {
+    return (
+      <div className = "pokemon-type-container">
+        <h3>Type</h3>
+        <PokemonType
+          type = {this.state.type}
+          onDropdownSelected = {(e, which) => this.onDropdownSelected(e, which)}
+        />
+      </div>
+    )
+  }
+
+  renderStatsContainer() {
+    return (
+      <div className="pokemon-stats-container">
+        <PokemonStats
+          state = {this.state}
+          onStatClick = {() => this.changeEditingStatus()}
+          onStatChange = {(statName, e) => this.handleStatChange(statName, e)}
+          onBlur = {() => this.handleStatBlur()}
+          onReset = {() => this.statReset()}
+        />
+      </div>
+    )
   }
 
   render() {
@@ -167,46 +228,21 @@ class PokemonContainer extends Component {
       <div className="pokemon-container">
         <form action="/save" method="POST">
 
-          <div className="pokemon-name-container">
-            <PokemonName
-              name = {this.state.name}
-              onClick = {() => this.handleEditName()}
-              onBlur = {(e) => this.handleNameBlur(e)}
-              isEditingName = {this.state.isEditingName}
-             />
-           </div>
+          {this.renderNameContainer()}
+          {this.renderImageContainer()}
+          {this.renderTypeContainer()}
+          {this.renderStatsContainer()}
 
-          <div className="pokemon-image-container">
-            <PokemonImage
-              src={this.state.currentImage}/>
-            <ImageInsertion
-              handleSubmitImage = {() => this.handleSubmitImage()}
-            />
-            <button onClick={(e) => this.resetEverything(e)}>Reset Everything</button>
-          </div>
-
-          <div className = "pokemon-type-container">
-            <h3>Type</h3>
-            <PokemonType
-              type = {this.state.type}
-              onDropdownSelected = {(e, which) => this.onDropdownSelected(e, which)}
-            />
-          </div>
-
-          <div className="pokemon-stats-container">
-            <PokemonStats
-              state = {this.state}
-              onStatClick = {() => this.changeEditingStatus()}
-              onStatChange = {(statName, e) => this.handleStatChange(statName, e)}
-              onBlur = {() => this.handleStatBlur()}
-              onReset = {() => this.statReset()}
-            />
-          </div>
+          <button type="submit">Save</button>
 
         </form>
 
         <SearchPokemon
           handleSearchPokemon = {() => this.handleSearchPokemon()}
+        />
+
+        <SearchBar
+          mons = {this.props.cache}
         />
 
       </div>

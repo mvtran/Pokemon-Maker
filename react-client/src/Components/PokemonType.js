@@ -17,7 +17,7 @@ const typeList = {
   'Rock': 'chocolate',
   'Ground': 'goldenrod',
   'Steel': 'silver',
-  'Fighting': 'red',
+  'Fighting': 'firebrick',
   'Flying': 'deepskyblue',
   'Ghost': 'indigo',
   'Poison': 'purple',
@@ -51,6 +51,7 @@ class PokemonType extends React.Component {
             whichType == 2 && list[i] != first
           ){
 
+          // have current type selected
           if (list[i] == this.props.type[0] || list[i] == this.props.type[1]) {
             types.push(<option
               key={i + " " + whichType} id={list[i] + whichType} value={list[i]} selected>
@@ -89,6 +90,8 @@ class PokemonType extends React.Component {
           {this.renderType(2)}
           {this.renderTypePicker(2)}
         </div>
+        <input type="hidden" name="type-1" value={this.props.type[0]}/>
+        <input type="hidden" name="type-2" value={this.props.type[1]}/>
       </div>
     )
   }

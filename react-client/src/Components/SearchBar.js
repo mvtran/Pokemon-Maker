@@ -2,33 +2,6 @@ import React, { Component } from 'react';
 import Utils from '../Utils.js';
 import Autosuggest from 'react-autosuggest';
 
-const mons = [
-  {
-    name: "pikachu",
-    type: "electric"
-  },
-  {
-    name: "psyduck",
-    type: "water"
-  },
-  {
-    name: "abomasnow",
-    type: "grass/ice"
-  },
-  {
-    name: "arbok",
-    type: "poison"
-  },
-  {
-    name: "porygon2",
-    type: "normal"
-  },
-  {
-    name: "ho-oh",
-    type: "fire/flying"
-  }
-];
-
 
 class SearchBar extends Component {
   constructor() {
@@ -37,7 +10,7 @@ class SearchBar extends Component {
       value: "",
       suggestions: []
     };
-    
+
     this.onChange = this.onChange.bind(this);
     this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
@@ -47,7 +20,7 @@ class SearchBar extends Component {
     var cleanInput = input.trim().toLowerCase();
     var len = cleanInput.length;
 
-    return len === 0 ? [] : mons.filter(mon =>
+    return len === 0 ? [] : this.props.mons.filter(mon =>
       mon.name.toLowerCase().slice(0, len) === cleanInput
     );
   }
@@ -65,7 +38,6 @@ class SearchBar extends Component {
   }
 
   onChange(e, {newValue}) {
-    console.log("onchange");
     this.setState({
       value: newValue
     });
@@ -76,7 +48,6 @@ class SearchBar extends Component {
     this.setState({
       suggestions: this.getSuggestions(value)
     });
-    console.log(this.state);
   }
 
   // Autosuggest will call this function every time you need to clear suggestions.
@@ -89,7 +60,7 @@ class SearchBar extends Component {
   render() {
     const { value, suggestions } = this.state;
     const inputProps = {
-      placeholder: "Search for Pokemon",
+      placeholder: "Autosuggest pokemon",
       value,
       onChange: this.onChange
     };

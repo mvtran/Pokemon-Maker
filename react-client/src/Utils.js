@@ -1,5 +1,14 @@
 var Utils = (function() {
   return {
+    capitalize: function(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    },
+
+    standardName: function(str) {
+      var words = str.toLowerCase().split(" ");
+      return words.join("-");
+    },
+
     // https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
     escapeRegexCharacters: function(str) {
       return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

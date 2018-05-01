@@ -1,2 +1,2 @@
 # Pokemon-Maker
-Custom Pokemon creator
+Available at https://pokemon-maker.herokuapp.com/
