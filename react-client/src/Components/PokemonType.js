@@ -4,24 +4,24 @@ import Utils from '../Utils.js';
 // TODO: replace with actual colors (color picker on in-game sprites)
 const typeList = {
   'None': 'white',
-  'Normal': 'burlywood',
-  'Fire': 'orange',
-  'Water': 'dodgerblue',
-  'Grass': 'limegreen',
-  'Electric': 'gold',
-  'Ice': 'paleturquoise',
-  'Psychic': 'deeppink',
-  'Dark': 'darkslategray',
-  'Fairy': 'pink',
-  'Dragon': 'blue',
-  'Rock': 'chocolate',
-  'Ground': 'goldenrod',
-  'Steel': 'silver',
-  'Fighting': 'firebrick',
-  'Flying': 'deepskyblue',
-  'Ghost': 'indigo',
-  'Poison': 'purple',
-  'Bug': 'yellowgreen'
+  'Normal': '#A8A878',
+  'Fire': '#F08030',
+  'Water': '#6890F0',
+  'Grass': '#78C850',
+  'Electric': '#F8D030',
+  'Ice': '#98D8D8',
+  'Psychic': '#F85888',
+  'Dark': '#705848',
+  'Fairy': '#EE99AC',
+  'Dragon': '#7038F8',
+  'Rock': '#B8A038',
+  'Ground': '#E0C068',
+  'Steel': '#B8B8D0',
+  'Fighting': '#C03028',
+  'Flying': '#A890F0',
+  'Ghost': '#705898',
+  'Poison': '#A040A0',
+  'Bug': '#A8B820'
 };
 
 

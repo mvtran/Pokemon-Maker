@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Utils from '../Utils.js';
+import * as U from '../Utils.js';
 import Autosuggest from 'react-autosuggest';
 
 
@@ -12,6 +12,7 @@ class SearchBar extends Component {
     };
 
     this.onChange = this.onChange.bind(this);
+    this.onSuggestionSelected = this.onSuggestionSelected.bind(this);
     this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
   }
@@ -26,13 +27,13 @@ class SearchBar extends Component {
   }
 
   getSuggestionValue(suggestion) {
-    return suggestion.name;
+    return U.capitalize(suggestion.name);
   }
 
   renderSuggestion(suggestion) {
     return (
       <div>
-        {suggestion.name}
+        {U.capitalize(suggestion.name)}
       </div>
     )
   }
@@ -41,6 +42,12 @@ class SearchBar extends Component {
     this.setState({
       value: newValue
     });
+    this.props.searchForThis(newValue);
+  }
+
+  onSuggestionSelected(e, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) {
+    e.preventDefault(); // otherwise, pressing enter resets everything
+    this.props.searchForThis(suggestionValue);
   }
 
   // Autosuggest will call this function every time you need to update suggestions.
@@ -60,7 +67,7 @@ class SearchBar extends Component {
   render() {
     const { value, suggestions } = this.state;
     const inputProps = {
-      placeholder: "Autosuggest pokemon",
+      placeholder: "Search for a pokemon",
       value,
       onChange: this.onChange
     };
@@ -69,6 +76,7 @@ class SearchBar extends Component {
       <div className="search-container">
         <Autosuggest
           suggestions={suggestions}
+          onSuggestionSelected={this.onSuggestionSelected}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
           getSuggestionValue={this.getSuggestionValue}

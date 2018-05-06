@@ -28,7 +28,8 @@ class PokemonContainer extends Component {
       },
       statBounds: [1, 255],
       currentImage: "../../assets/placeholder.png",
-      type: ["Normal", "None"]
+      type: ["Normal", "None"],
+      pokemonToSearch: ""
     }
     this.state = JSON.parse(JSON.stringify(this.defaultState));
     this.handleSubmitImage = this.handleSubmitImage.bind(this);
@@ -65,6 +66,12 @@ class PokemonContainer extends Component {
     this.setState(updatedState);
   }
 
+  changeEditingStatus() {
+    var updatedState = this.state;
+    updatedState.isEditingStats = true;
+    this.setState(updatedState);
+  }
+
   // "res" = pokemon in json returned by pokeapi
   insertPokemon(res) {
     this.changeName(U.capitalize(res["name"]));
@@ -84,6 +91,12 @@ class PokemonContainer extends Component {
     this.changeStat("Speed", res.stats[0].base_stat);
   }
 
+  searchForThis(who) {
+    var updatedState = this.state;
+    updatedState.pokemonToSearch = who;
+    this.setState(updatedState);
+  }
+
   handleNameClick() {
     var updatedState = this.state;
     updatedState.isEditingName = true;
@@ -95,12 +108,6 @@ class PokemonContainer extends Component {
     if (e.target.value)
       updatedState.name = e.target.value;
     updatedState.isEditingName = false;
-    this.setState(updatedState);
-  }
-
-  changeEditingStatus() {
-    var updatedState = this.state;
-    updatedState.isEditingStats = true;
     this.setState(updatedState);
   }
 
@@ -128,15 +135,12 @@ class PokemonContainer extends Component {
   }
 
   handleSearchPokemon() {
-    var pokemon = document.getElementById("search-pokemon").value;
-
-    if (pokemon) {
-      const Pokedex = require('../../../node_modules/pokeapi-js-wrapper');
-      const P = new Pokedex.Pokedex({protocol: 'https'});
+    if (this.state.pokemonToSearch) {
+      const pokemon = this.state.pokemonToSearch.toLowerCase();
 
       var _this = this; // "this" becomes undefined if not stored here
 
-      P.getPokemonByName(pokemon)
+      this.props.P.getPokemonByName(pokemon)
       .then(function(res) {
         _this.insertPokemon(res);
       })
@@ -222,29 +226,30 @@ class PokemonContainer extends Component {
     )
   }
 
+  renderSearchContainer() {
+    return (
+      <SearchPokemon
+        mons = {this.props.cache}
+        searchForThis = {(who) => this.searchForThis(who)}
+        handleSearchPokemon = {() => this.handleSearchPokemon()}
+      />
+    )
+  }
+
   render() {
 
+    // <button type="submit">Save</button>
     return (
       <div className="pokemon-container">
         <form action="/save" method="POST">
 
           {this.renderNameContainer()}
+          {this.renderSearchContainer()}
           {this.renderImageContainer()}
           {this.renderTypeContainer()}
           {this.renderStatsContainer()}
 
-          <button type="submit">Save</button>
-
         </form>
-
-        <SearchPokemon
-          handleSearchPokemon = {() => this.handleSearchPokemon()}
-        />
-
-        <SearchBar
-          mons = {this.props.cache}
-        />
-
       </div>
     )
   }
