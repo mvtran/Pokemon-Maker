@@ -7,6 +7,7 @@ class ImageInsertion extends Component {
           <label>
             Image URL:<br/>
             <input type="text" id="image-url"
+              placeholder="http://"
               onClick = {(e) => e.target.select()} />
           </label>
           <button type="button"

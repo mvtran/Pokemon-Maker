@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Utils from '../Utils.js';
 
-// TODO: replace with actual colors (color picker on in-game sprites)
 const typeList = {
   'None': 'white',
   'Normal': '#A8A878',

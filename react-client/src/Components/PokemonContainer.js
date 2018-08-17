@@ -41,7 +41,7 @@ class PokemonContainer extends Component {
     //   console.log("Success! Value is " + cache);
     // } else {
     //   console.log("fuck you");
-    // }
+    //}
   }
 
   changeName(newName) {
@@ -134,6 +134,7 @@ class PokemonContainer extends Component {
     this.setState(updatedState);
   }
 
+  // searches the pokemon currently in the state and puts it in
   handleSearchPokemon() {
     if (this.state.pokemonToSearch) {
       const pokemon = this.state.pokemonToSearch.toLowerCase();
@@ -212,6 +213,29 @@ class PokemonContainer extends Component {
     )
   }
 
+  renderAbilityContainer() {
+    return (
+      <div className = "pokemon-ability-container">
+        <h3>Ability</h3>
+      </div>
+    )
+  }
+
+  // TODO: render type and ability in table
+  renderGeneralInfo() {
+    return (
+      <table>
+        <tbody>
+
+          <tr>
+            <td>Type</td><td></td>
+          </tr>
+
+        </tbody>
+      </table>
+    )
+  }
+
   renderStatsContainer() {
     return (
       <div className="pokemon-stats-container">
@@ -238,7 +262,10 @@ class PokemonContainer extends Component {
 
   render() {
 
-    // <button type="submit">Save</button>
+    // add this to form below. when clicked, you can view the pokemon
+    // sent in the command line window running server-dev
+    //<button type="submit">Save</button>
+
     return (
       <div className="pokemon-container">
         <form action="/save" method="POST">

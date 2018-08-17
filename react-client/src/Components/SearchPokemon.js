@@ -8,6 +8,7 @@ class SearchPokemon extends Component {
         <SearchBar
           mons = {this.props.mons}
           searchForThis = {(who) => this.props.searchForThis(who)}
+          executeSearch = {() => this.props.handleSearchPokemon()}
         />
         <button type="button"
           id="search-pokemon-button"
